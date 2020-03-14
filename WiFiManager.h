@@ -117,6 +117,9 @@ class WiFiManager
     void          setCustomHeadElement(const char* element);
     //if this is true, remove duplicated Access Points - defaut true
     void          setRemoveDuplicateAPs(boolean removeDuplicates);
+    //if true disable captive portal redirection
+    void          setCaptivePortalEnable(boolean enabled);
+
 
   private:
     std::unique_ptr<DNSServer>        dnsServer;
@@ -150,6 +153,7 @@ class WiFiManager
     boolean       _removeDuplicateAPs     = true;
     boolean       _shouldBreakAfterConfig = false;
     boolean       _tryWPS                 = false;
+    boolean       _enableCaptivePortal    = true;
 
     const char*   _customHeadElement      = "";
 

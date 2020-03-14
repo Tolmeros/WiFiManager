@@ -772,6 +772,8 @@ void WiFiManager::handleNotFound() {
 
 /** Redirect to captive portal if we got a request for another domain. Return true in that case so the page handler do not try to handle the request again. */
 boolean WiFiManager::captivePortal() {
+  if(!_enableCaptivePortal) return false; // skip redirections
+
   if (!isIp(server->hostHeader()) ) {
     DEBUG_WM(F("Request redirected to captive portal"));
     server->sendHeader("Location", String("http://") + toStringIp(server->client().localIP()), true);
@@ -801,6 +803,11 @@ void WiFiManager::setCustomHeadElement(const char* element) {
 void WiFiManager::setRemoveDuplicateAPs(boolean removeDuplicates) {
   _removeDuplicateAPs = removeDuplicates;
 }
+
+void WiFiManager::setCaptivePortalEnable(boolean enabled){
+  _enableCaptivePortal = enabled;
+}
+
 
 
 
